@@ -16,7 +16,5 @@ class Main : Application() {
 }
 
 fun main(args: Array<String>){
-//    val loop: GameLoop = GameFactory.createGameLoop(LoopType.Basic)
-//    loop.startLoop()
     Application.launch(Main::class.java, *args)
 }

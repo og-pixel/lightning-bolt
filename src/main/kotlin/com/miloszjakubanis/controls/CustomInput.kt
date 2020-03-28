@@ -10,5 +10,4 @@ class CustomInput(
     override val BUTTON_LEFT: String,
     override val BUTTON_RIGHT: String,
     override val BUTTON_DOWN: String
-) : Buttons {
-}
+) : ConcreteButtons

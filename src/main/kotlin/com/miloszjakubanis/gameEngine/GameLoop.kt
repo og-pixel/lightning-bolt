@@ -1,29 +1,24 @@
-package com.miloszjakubanis
+package com.miloszjakubanis.gameEngine
 
-import com.miloszjakubanis.controls.ButtonsEnum
-import com.miloszjakubanis.controls.Input
-import java.awt.event.KeyEvent
-
+import com.miloszjakubanis.controls.Button.*
+import com.miloszjakubanis.controls.Button
+import com.miloszjakubanis.unit.Controllable
+import com.miloszjakubanis.unit.Player
 
 class GameLoop: Runnable {
-    enum class Status {
-        RUNNING,
-        STOPPED
-    }
 
-//    init {
-//        userInput.attach(this)
-//    }
+    private val ticksPerSecond = 60
+    private val oneFrameDuration = 1000000000 / ticksPerSecond
 
-    private val TICKS_PER_SECOND = 60
-    private val frameTime = 1000000000 / TICKS_PER_SECOND
-    private var gameStatus: Status = Status.STOPPED
+    private var gameStatus: LoopStatus = LoopStatus.STOPPED
 
-    //    var pressedButton: String = ""
-    var pressedButton: ButtonsEnum? = null
+    //TODO should be init somehow differently
+    private val controllable: Controllable = Player()
+
+    var pressedButton: Button = NO_BUTTON
 
     fun startLoop() {
-        gameStatus = Status.RUNNING
+        gameStatus = LoopStatus.RUNNING
 
         var lastTime = System.nanoTime()
         var delta = 0.0
@@ -31,9 +26,9 @@ class GameLoop: Runnable {
         var frames = 0
         var timer = System.currentTimeMillis()
 
-        while (gameStatus == Status.RUNNING) {
+        while (gameStatus == LoopStatus.RUNNING) {
             val now = System.nanoTime()
-            delta += (now - lastTime) / frameTime.toDouble()
+            delta += (now - lastTime) / oneFrameDuration.toDouble()
             lastTime = now
             if (delta >= 1) {
                 tick()
@@ -51,7 +46,6 @@ class GameLoop: Runnable {
                 frames = 0
             }
         }
-
     }
 
     private fun tick() {
@@ -59,13 +53,15 @@ class GameLoop: Runnable {
     }
 
     private fun takeUserInput() {
-        if(pressedButton != null){
+        if(pressedButton != NO_BUTTON){
             println("Pressed: $pressedButton")
-            pressedButton = null
+            controllable.readInput(pressedButton)
+            pressedButton = NO_BUTTON
         }
     }
 
     private fun redrawCanvas() {
+        
     }
 
     override fun run() {

@@ -1,6 +1,6 @@
 package com.miloszjakubanis.controls
 
-interface Buttons {
+interface ConcreteButtons {
     val BUTTON_1: String
     val BUTTON_2: String
     val BUTTON_3: String

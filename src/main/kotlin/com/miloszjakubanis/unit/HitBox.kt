@@ -1,4 +1,4 @@
-package com.miloszjakubanis
+package com.miloszjakubanis.unit
 
 interface HitBox {
     var width: Int

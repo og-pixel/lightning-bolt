@@ -1,4 +1,4 @@
-package com.miloszjakubanis
+package com.miloszjakubanis.unit
 
 class BasicHitbox(
     override var width: Int,

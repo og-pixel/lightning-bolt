@@ -1,8 +1,6 @@
 package com.miloszjakubanis.controls
 
-import java.awt.event.KeyAdapter
-
-class DefaultInput : Input, Buttons, KeyAdapter() {
+class DefaultInput : Input {
 
     override val BUTTON_1: String
         get() = "p"
@@ -22,14 +20,4 @@ class DefaultInput : Input, Buttons, KeyAdapter() {
         get() = "d"
     override val BUTTON_DOWN: String
         get() = "s"
-
-//    lateinit var loop: GameLoop
-//
-//    override fun attach(loop: GameLoop) {
-//        this.loop = loop
-//    }
-
-//    override fun getKeyPressed(key: String): ButtonsEnum? {
-//
-//    }
 }

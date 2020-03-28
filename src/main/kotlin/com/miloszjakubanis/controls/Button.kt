@@ -1,6 +1,6 @@
 package com.miloszjakubanis.controls
 
-enum class ButtonsEnum {
+enum class Button {
     BUTTON_1,
     BUTTON_2,
     BUTTON_3,
@@ -9,5 +9,6 @@ enum class ButtonsEnum {
     BUTTON_UP,
     BUTTON_LEFT,
     BUTTON_RIGHT,
-    BUTTON_DOWN
+    BUTTON_DOWN,
+    NO_BUTTON
 }
