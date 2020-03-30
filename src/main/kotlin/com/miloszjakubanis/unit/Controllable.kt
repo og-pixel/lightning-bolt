@@ -1,6 +1,7 @@
 package com.miloszjakubanis.unit
 
 import com.miloszjakubanis.controls.Button
+import com.miloszjakubanis.graphics.Sprite
 
 /**
  * Classes implementing this interface

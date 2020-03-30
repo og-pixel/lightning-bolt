@@ -1,9 +1,14 @@
 package com.miloszjakubanis.unit
 
-abstract class BasicObject {
+import com.miloszjakubanis.graphics.Sprite
 
-    val unit: Unit? = null
-    val hitBox: HitBox? = null
+abstract class BasicObject(
+    var speed: Double = 60.0
+) {
+
+    val hitBox: HitBox = NoHitbox()
+    abstract val sprite: Sprite
+
 
 
 }

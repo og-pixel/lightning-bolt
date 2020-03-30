@@ -2,27 +2,29 @@ package com.miloszjakubanis.unit
 
 import com.miloszjakubanis.controls.Button.*
 import com.miloszjakubanis.controls.Button
+import com.miloszjakubanis.graphics.Sprite
 import javafx.scene.image.Image
 
-class Player : Controllable {
+class Player(
+    override val sprite: Sprite
+) : Controllable, BasicObject(1000.0) {
 
-    var height = 50
-    var width = 50
-
-    var xPos = 0
+    var xPos = sprite.xPos
         private set
-    var yPos = 0
+    var yPos = sprite.yPos
         private set
-
-    //TODO change to sprite class
-    var image = Image("img/1.jpg")
 
     override fun readInput(pressedButton: Button) {
-        if (pressedButton == BUTTON_UP) yPos++
-        if (pressedButton == BUTTON_DOWN) yPos--
-        if (pressedButton == BUTTON_LEFT) xPos--
-        if (pressedButton == BUTTON_RIGHT) xPos++
+        if (pressedButton == BUTTON_UP) yPos -= (speed/60)
+        if (pressedButton == BUTTON_DOWN) yPos += (speed/60)
+        if (pressedButton == BUTTON_LEFT) xPos -= (speed/60)
+        if (pressedButton == BUTTON_RIGHT) xPos += (speed/60)
 
+        sprite.xPos = xPos
+        sprite.yPos = yPos
+
+//        println("xPos:$xPos   yPos:$yPos")
     }
+
 
 }

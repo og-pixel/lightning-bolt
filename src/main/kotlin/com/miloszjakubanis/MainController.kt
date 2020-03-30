@@ -23,30 +23,8 @@ class MainController: Initializable {
     @FXML
     lateinit var pane: AnchorPane
 
-    //TODO those should be init somehow differently
-    val gameLoop: GameLoop = GameFactory.createGameLoop(LoopType.Basic)
-    val input: Input = DefaultInput()
-
-    private fun addInputListeners(){
-        val x: EventHandler<KeyEvent> = EventHandler { event ->
-            gameLoop.pressedButton = input.getKeyPressed(event.text)
-        }
-        pane.addEventHandler(KeyEvent.KEY_PRESSED, x)
-    }
-
     override fun initialize(location: URL?, resources: ResourceBundle?) {
         graphicsContext = mainCanvas.graphicsContext2D
-        graphicsContext.drawImage(Image("img/1.jpg"), 50.0, 50.0, 50.0, 50.0)
-
-        addInputListeners()
     }
 
-    //TODO naive, clears whole square
-    private fun updateGraphics(){
-        graphicsContext.clearRect(0.0, 0.0, mainCanvas.width, mainCanvas.height)
-    }
-
-    init {
-        Thread(gameLoop).start()
-    }
 }

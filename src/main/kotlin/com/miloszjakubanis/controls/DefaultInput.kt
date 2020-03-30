@@ -3,15 +3,15 @@ package com.miloszjakubanis.controls
 class DefaultInput : Input {
 
     override val BUTTON_1: String
-        get() = "p"
+        get() = "h"
     override val BUTTON_2: String
-        get() = "b"
+        get() = "j"
     override val BUTTON_3: String
-        get() = "c"
+        get() = "k"
     override val BUTTON_4: String
-        get() = "d"
+        get() = "l"
     override val BUTTON_5: String
-        get() = "e"
+        get() = ";"
     override val BUTTON_UP: String
         get() = "w"
     override val BUTTON_LEFT: String
