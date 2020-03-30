@@ -31,8 +31,6 @@ class GameLoop: Runnable {
     }
 
     private fun takeUserInput() {
-//        controllable.readInput(BUTTON_DOWN)
-
         if(pressedButton != NO_BUTTON){
             controllable.readInput(pressedButton)
             pressedButton = NO_BUTTON
@@ -44,7 +42,7 @@ class GameLoop: Runnable {
         val height = mainWindowInterface.controller.mainCanvas.height
         val graphicsContext = mainWindowInterface.controller.graphicsContext
         graphicsContext.clearRect(0.0, 0.0, width, height)
-        graphicsContext.drawImage(controllable.sprite.image, controllable.xPos, controllable.yPos)
+        graphicsContext.drawImage(controllable.sprite.image, controllable.sprite.xPos, controllable.sprite.yPos)
     }
 
     override fun run() {
@@ -66,16 +64,18 @@ class GameLoop: Runnable {
         var timer = System.currentTimeMillis()
 
         while (gameStatus == LoopStatus.RUNNING) {
+            Thread.sleep(5)
+
             val now = System.nanoTime()
             delta += (now - lastTime) / oneFrameDuration.toDouble()
             lastTime = now
             if (delta >= 1) {
                 tick()
-                redrawCanvas()
+//                redrawCanvas()
                 updates++
                 delta--
             }
-//            redrawCanvas()
+            redrawCanvas()
             frames++
 
             //Update every second

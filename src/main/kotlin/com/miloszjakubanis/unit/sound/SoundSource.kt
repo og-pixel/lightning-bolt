@@ -9,5 +9,5 @@ interface SoundSource {
     fun playSound(duration: Double)
     fun stopSound()
 
-    fun getAllSoundsBasedOnType(soundType: SoundType)
+    fun getAllSoundsBasedOnType(soundType: SoundType): List<String>
 }
