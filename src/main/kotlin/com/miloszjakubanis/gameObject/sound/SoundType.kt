@@ -1,4 +1,4 @@
-package com.miloszjakubanis.unit.sound
+package com.miloszjakubanis.gameObject.sound
 
 enum class SoundType {
     ATTACK,

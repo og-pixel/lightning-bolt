@@ -1,7 +1,6 @@
-package com.miloszjakubanis.unit
+package com.miloszjakubanis.gameObject.`object`
 
 import com.miloszjakubanis.controls.Button
-import com.miloszjakubanis.graphics.Sprite
 
 /**
  * Classes implementing this interface
@@ -12,4 +11,5 @@ interface Controllable {
 
     fun readInput(pressedButton: Button)
 
+    fun readInputs(pressedButtons: List<Button>)
 }

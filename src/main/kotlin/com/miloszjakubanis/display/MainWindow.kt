@@ -1,7 +1,7 @@
-package com.miloszjakubanis.gameEngine
+package com.miloszjakubanis.display
 
-import com.miloszjakubanis.MainController
 import com.miloszjakubanis.controls.Input
+import com.miloszjakubanis.gameEngine.GameLoop
 import javafx.event.EventHandler
 import javafx.fxml.FXMLLoader
 import javafx.scene.Parent
@@ -9,7 +9,7 @@ import javafx.scene.Scene
 import javafx.scene.input.KeyEvent
 import javafx.stage.Stage
 
-class MainWindowInterface(
+class MainWindow(
     private val gameLoop: GameLoop,
     private val input: Input
 ) : Runnable {

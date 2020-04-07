@@ -1,6 +1,6 @@
 package com.miloszjakubanis.gameEngine.spawner
 
-import com.miloszjakubanis.unit.EnvironmentObject
+import com.miloszjakubanis.gameEngine.GameLoop
 
 class ObjectSpawnerFactory {
 
@@ -14,7 +14,7 @@ class ObjectSpawnerFactory {
      * Creates an object controllable by the player
      */
     fun createPlayerObject() {
-         
+
     }
 
 }
