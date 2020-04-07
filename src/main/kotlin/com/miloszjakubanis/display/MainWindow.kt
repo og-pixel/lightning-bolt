@@ -23,18 +23,16 @@ class MainWindow(
     }
 
     private fun addInputListeners() {
-        val x: EventHandler<KeyEvent> = EventHandler { event ->
+        val eventHandler: EventHandler<KeyEvent> = EventHandler { event ->
             gameLoop.pressedButton = input.getKeyPressed(event.text)
         }
-        controller.pane.addEventHandler(KeyEvent.KEY_PRESSED, x)
+        controller.pane.addEventHandler(KeyEvent.KEY_PRESSED, eventHandler)
     }
 
     override fun run() {
         val stage = Stage()
         stage.scene = Scene(root, 800.0, 600.0)
-        stage.title = "Hello World"
+        stage.title = "Main Window"
         stage.show()
     }
-
-
 }

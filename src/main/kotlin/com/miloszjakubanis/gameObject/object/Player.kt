@@ -3,16 +3,15 @@ package com.miloszjakubanis.gameObject.`object`
 import com.miloszjakubanis.controls.Button.*
 import com.miloszjakubanis.controls.Button
 import com.miloszjakubanis.gameEngine.GameLoop
-import com.miloszjakubanis.gameObject.BasicObject
-import com.miloszjakubanis.gameObject.graphics.Animation
+import com.miloszjakubanis.gameObject.spriteGraphics.GameSprite
+import com.miloszjakubanis.gameObject.spriteGraphics.SpriteAnimation
 
 class Player(
     xPos: Double,
     yPos: Double,
-    animation: Animation,
+    gameSprite: GameSprite,
     speed: Double = 60.0
-
-) : Controllable, Character(xPos, yPos, animation, speed) {
+) : Controllable, Character(xPos, yPos, gameSprite, speed) {
 
     val gameSpeed: Int
         get() = GameLoop.ticksPerSecond
@@ -42,6 +41,4 @@ class Player(
             readInput(button)
         }
     }
-
-
 }

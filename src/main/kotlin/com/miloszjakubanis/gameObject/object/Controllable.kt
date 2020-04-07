@@ -12,4 +12,7 @@ interface Controllable {
     fun readInput(pressedButton: Button)
 
     fun readInputs(pressedButtons: List<Button>)
+
+    //TODO later add mouse events
+    //fun readMouseInput()
 }

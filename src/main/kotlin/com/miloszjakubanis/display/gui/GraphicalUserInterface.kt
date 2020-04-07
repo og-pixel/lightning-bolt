@@ -5,5 +5,5 @@ package com.miloszjakubanis.display.gui
  * inheriting from it, it should have all basic drawing and button extracting
  * abilities
  */
-class Interface {
+class GraphicalUserInterface {
 }
