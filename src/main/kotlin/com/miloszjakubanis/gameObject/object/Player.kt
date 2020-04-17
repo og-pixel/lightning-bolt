@@ -3,37 +3,33 @@ package com.miloszjakubanis.gameObject.`object`
 import com.miloszjakubanis.controls.Button.*
 import com.miloszjakubanis.controls.Button
 import com.miloszjakubanis.gameEngine.GameLoop
-import com.miloszjakubanis.gameObject.spriteGraphics.GameSprite
-import com.miloszjakubanis.gameObject.spriteGraphics.SpriteAnimation
+import com.miloszjakubanis.gameObject.spriteGraphics.AnimationDirection
+import com.miloszjakubanis.gameObject.spriteGraphics.ObjectSprites
 
 class Player(
     xPos: Double,
     yPos: Double,
-    gameSprite: GameSprite,
+    objectSprites: ObjectSprites = ObjectSprites(),
     speed: Double = 60.0
-) : Controllable, Character(xPos, yPos, gameSprite, speed) {
-
-    val gameSpeed: Int
-        get() = GameLoop.ticksPerSecond
+) : Controllable, Character(xPos, yPos, objectSprites, speed) {
 
     override fun readInput(pressedButton: Button) {
         if (pressedButton == BUTTON_UP) {
-            yPos -= (speed / gameSpeed)
+            moveUp()
             return
         }
         if (pressedButton == BUTTON_DOWN) {
-            yPos += (speed / gameSpeed)
+            moveDown()
             return
         }
         if (pressedButton == BUTTON_LEFT) {
-            xPos -= (speed / gameSpeed)
+            moveLeft()
             return
         }
         if (pressedButton == BUTTON_RIGHT) {
-            xPos += (speed / gameSpeed)
+            moveRight()
             return
         }
-
     }
 
     override fun readInputs(pressedButtons: List<Button>) {

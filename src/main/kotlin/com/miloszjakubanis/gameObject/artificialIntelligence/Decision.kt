@@ -1,8 +1,8 @@
 package com.miloszjakubanis.gameObject.artificialIntelligence
 
-import com.miloszjakubanis.gameObject.BasicObject
+import com.miloszjakubanis.gameObject.GameObject
 
 interface Decision {
 
-    fun performDecision(basicObject: BasicObject)
+    fun performDecision(gameObject: GameObject)
 }

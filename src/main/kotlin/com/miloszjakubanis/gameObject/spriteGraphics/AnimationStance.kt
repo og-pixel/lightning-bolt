@@ -1,9 +1,5 @@
 package com.miloszjakubanis.gameObject.spriteGraphics
 
-//enum class AnimationStance {
-//    IDLE,
-//    MOVING,
-//    ATTACKING,
-//    DEFENDING,
-//    SPECIAL
-//}
+enum class AnimationStance {
+    IDLE, MOVING, ATTACKING, DEFENDING, SPECIAL
+}
