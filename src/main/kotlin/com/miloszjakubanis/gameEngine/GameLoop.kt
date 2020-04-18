@@ -5,10 +5,13 @@ import com.miloszjakubanis.controls.Button
 import com.miloszjakubanis.controls.DefaultInput
 import com.miloszjakubanis.controls.Input
 import com.miloszjakubanis.display.MainWindow
+import com.miloszjakubanis.gameEngine.board.GameLayer
+import com.miloszjakubanis.gameEngine.board.BoardLayer
+import com.miloszjakubanis.gameEngine.board.GroundTile
 import com.miloszjakubanis.gameObject.GameObject
 import com.miloszjakubanis.gameObject.`object`.Player
 import com.miloszjakubanis.gameObject.spriteGraphics.AnimationDirection
-import com.miloszjakubanis.gameObject.spriteGraphics.AnimationFactory
+import com.miloszjakubanis.gameObject.spriteGraphics.SpriteFactory
 import com.miloszjakubanis.gameObject.spriteGraphics.AnimationStance
 //import com.miloszjakubanis.gameObject.spriteGraphics.AnimationDirection
 //import com.miloszjakubanis.gameObject.spriteGraphics.AnimationFactory
@@ -18,7 +21,6 @@ import javafx.application.Platform
 class GameLoop : Runnable {
 
     companion object  {
-
         const val ticksPerSecond = 60
         const val oneFrameDuration = 1000000000 / ticksPerSecond
 
@@ -37,39 +39,41 @@ class GameLoop : Runnable {
     //TODO should be init somehow differently
     private val player: Player
 
+    val gameLayer: GameLayer
+
     init {
-        AnimationFactory.height = 30.0
-        AnimationFactory.width = 30.0
-        AnimationFactory.scale = 4.0
-        AnimationFactory.animationSpeed = 1
-        var downIdleAnimation = AnimationFactory.addFrame("sprites/characters/soldier/sprite_4.png")
+        SpriteFactory.height = 30.0
+        SpriteFactory.width = 30.0
+        SpriteFactory.scale = 4.0
+        SpriteFactory.animationSpeed = 1
+        var downIdleAnimation = SpriteFactory.addFrame("sprites/characters/soldier/sprite_4.png")
             .addFrame("sprites/characters/soldier/sprite_5.png")
             .addFrame("sprites/characters/soldier/sprite_6.png")
             .getAnimation(AnimationStance.IDLE, AnimationDirection.DOWN)
 
-        AnimationFactory.height = 30.0
-        AnimationFactory.width = 30.0
-        AnimationFactory.scale = 4.0
-        AnimationFactory.animationSpeed = 1
-        var rightIdleAnimation = AnimationFactory.addFrame("sprites/characters/soldier/sprite_1.png")
+        SpriteFactory.height = 30.0
+        SpriteFactory.width = 30.0
+        SpriteFactory.scale = 4.0
+        SpriteFactory.animationSpeed = 1
+        var rightIdleAnimation = SpriteFactory.addFrame("sprites/characters/soldier/sprite_1.png")
             .addFrame("sprites/characters/soldier/sprite_2.png")
             .addFrame("sprites/characters/soldier/sprite_3.png")
             .getAnimation(AnimationStance.IDLE, AnimationDirection.RIGHT)
 
-        AnimationFactory.height = 30.0
-        AnimationFactory.width = 30.0
-        AnimationFactory.scale = 4.0
-        AnimationFactory.animationSpeed = 1
-        var upIdleAnimation = AnimationFactory.addFrame("sprites/characters/soldier/sprite_7.png")
+        SpriteFactory.height = 30.0
+        SpriteFactory.width = 30.0
+        SpriteFactory.scale = 4.0
+        SpriteFactory.animationSpeed = 1
+        var upIdleAnimation = SpriteFactory.addFrame("sprites/characters/soldier/sprite_7.png")
             .addFrame("sprites/characters/soldier/sprite_8.png")
             .addFrame("sprites/characters/soldier/sprite_9.png")
             .getAnimation(AnimationStance.IDLE, AnimationDirection.UP)
 
-        AnimationFactory.height = 30.0
-        AnimationFactory.width = 30.0
-        AnimationFactory.scale = 4.0
-        AnimationFactory.animationSpeed = 1
-        var leftIdleAnimation = AnimationFactory.addFrame("sprites/characters/soldier/sprite_10.png")
+        SpriteFactory.height = 30.0
+        SpriteFactory.width = 30.0
+        SpriteFactory.scale = 4.0
+        SpriteFactory.animationSpeed = 1
+        var leftIdleAnimation = SpriteFactory.addFrame("sprites/characters/soldier/sprite_10.png")
             .addFrame("sprites/characters/soldier/sprite_11.png")
             .addFrame("sprites/characters/soldier/sprite_12.png")
             .getAnimation(AnimationStance.IDLE, AnimationDirection.LEFT)
@@ -81,6 +85,10 @@ class GameLoop : Runnable {
         player.objectSprites?.addAnimation(leftIdleAnimation)
 
         allObjects = allObjects + player
+
+        gameLayer = BoardLayer(10,10, 50.0, 50.0)
+        //TODO remove
+//        System.exit(0)
     }
 
     var pressedButton: Button = NO_BUTTON
@@ -108,9 +116,26 @@ class GameLoop : Runnable {
     private fun redrawCanvas() {
         clearCanvas()
         val graphicsContext = mainWindow.controller.graphicsContext
+
+
+        for (x in 0..gameLayer.boardHeight){
+            for (y in 0..gameLayer.boardWidth){
+                val tileImage = gameLayer.getTile(x,y).spriteFrame.image
+                val tileImage2 = (gameLayer.getTile(x,y) as GroundTile).spriteFrame2.image
+
+                if(gameLayer.getTile(x,y).isFocused){
+                    graphicsContext.drawImage(tileImage2, x * 50.0,y * 50.0)
+                }else{
+                    graphicsContext.drawImage(tileImage, x * 50.0,y * 50.0)
+                }
+
+            }
+        }
+
         allObjects.forEach { e ->
             graphicsContext.drawImage(e.objectSprites?.getCurrentAnimation()?.currentSprite?.image, e.xPos, e.yPos)
         }
+
     }
 
     private fun clearCanvas(){
@@ -137,7 +162,7 @@ class GameLoop : Runnable {
         var timer = System.currentTimeMillis()
 
         while (gameStatus == LoopStatus.RUNNING) {
-            Thread.sleep(6)
+            Thread.sleep(7)
 
             val now = System.nanoTime()
             delta += (now - lastTime) / oneFrameDuration.toDouble()

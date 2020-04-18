@@ -2,7 +2,11 @@ package com.miloszjakubanis.gameObject.spriteGraphics
 
 import javafx.scene.image.Image
 
-object AnimationFactory {
+/**
+ * Creates singular "frames" and
+ * whole animations
+ */
+object SpriteFactory {
 
     var width = 0.0
     var height = 0.0
@@ -10,16 +14,16 @@ object AnimationFactory {
     var animationSpeed = 1
     var animationLoop = true
 
-    private var frameList = ArrayList<Frame>()
+    private var frameList = ArrayList<SpriteFrame>()
 
     /**
      * Returns itself so it can be chained to add multiple frames at the same time and returned with
      * getAnimation()
      */
-    fun addFrame(img: String): AnimationFactory {
+    fun addFrame(img: String): SpriteFactory {
 
         frameList.add(
-            Frame(
+            SpriteFrame(
                 width * scale, height * scale, image = Image(
                     img, width * scale, height * scale, true, true
                 )
@@ -28,15 +32,29 @@ object AnimationFactory {
         return this
     }
 
+    fun getSingleFrame(
+        img: String,
+        flushOnReturn: Boolean = true
+    ): SpriteFrame {
+        val frame = SpriteFrame(
+            width * scale, height * scale, image = Image(
+                img, width * scale, height * scale, true, true
+            )
+        )
+        if (flushOnReturn) flush()
+        return frame
+    }
+
     fun getAnimation(
         animationStance: AnimationStance,
-        animationDirection: AnimationDirection
+        animationDirection: AnimationDirection,
+        flushOnReturn: Boolean = true
     ): SpriteAnimation {
         val product = SpriteAnimation(
             frameList, animationLoop, animationSpeed,
             animationStance, animationDirection
         )
-        flush()
+        if (flushOnReturn) flush()
         return product
     }
 

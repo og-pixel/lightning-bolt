@@ -1,4 +1,4 @@
 package com.miloszjakubanis.gameEngine.board
 
-interface Layer {
-}
+//class StandardTile: Tile() {
+//}
