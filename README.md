@@ -1,9 +1,10 @@
-## Lightning Bolt 2D Engine
+## Lightning Bolt 2D Game/Engine
 ![](src/main/resources/img/logo/logo.png)
 
 Project Bolt
 ======
-Simple Kotlin 2D game engine using JavaFX 
+Simple Kotlin 2D strategy game, with an attempt 
+to write the base of it as a universal game engine base I can use for further projects.
 
 #### Screenshot
 ![Screenshot software]()
@@ -30,7 +31,7 @@ and learning only so I might ignore
 ## License
 * GPL v3.0
 
-## Version
+## Version History
 * 0.0.1: Basic Init and render loop
 
 ## How-to use this code
@@ -38,6 +39,6 @@ and learning only so I might ignore
 
 ## Contact
 #### Developer/Company
-* Homepage: www.miloszjakubanis.com
-* e-mail: milosz.jakubanis@protonmail.com
+ Homepage: www.miloszjakubanis.com
+ e-mail: milosz.jakubanis@protonmail.com
 

@@ -1,15 +1,17 @@
 package com.miloszjakubanis.gameObject
 
+import com.miloszjakubanis.Position
 import com.miloszjakubanis.gameEngine.GameLoop
 import com.miloszjakubanis.gameObject.artificialIntelligence.Ai
 import com.miloszjakubanis.gameObject.hitbox.HitBox
 import com.miloszjakubanis.gameObject.sound.SoundSource
-import com.miloszjakubanis.gameObject.spriteGraphics.AnimationDirection
-import com.miloszjakubanis.gameObject.spriteGraphics.ObjectSprites
+import com.miloszjakubanis.gameObject.sprite.AnimationDirection
+import com.miloszjakubanis.gameObject.sprite.ObjectSprites
 
 abstract class GameObject(
-    var xPos: Double = 0.0,
-    var yPos: Double = 0.0,
+//    var xPos: Double = 0.0,
+//    var yPos: Double = 0.0,
+    var position: Position,
     var objectSprites: ObjectSprites? = null,
     var speed: Double
 ) {
@@ -20,6 +22,9 @@ abstract class GameObject(
 //   /*abstract*/ var animation: Animation? = null
 
     var objectName = ""
+
+    val xPos: Double = position.xPos
+    val yPos: Double = position.yPos
 
     //TODO I repeat this val a couple of times
     val gameSpeed: Int
@@ -32,21 +37,21 @@ abstract class GameObject(
 
     fun moveUp(){
         objectSprites?.currentDirection = AnimationDirection.UP
-        yPos -= (speed / gameSpeed)
+        position.yPos -= (speed / gameSpeed)
     }
 
     fun moveDown(){
         objectSprites?.currentDirection = AnimationDirection.DOWN
-        yPos += (speed / gameSpeed)
+        position.yPos += (speed / gameSpeed)
     }
 
     fun moveLeft(){
         objectSprites?.currentDirection = AnimationDirection.LEFT
-        xPos -= (speed / gameSpeed)
+        position.xPos -= (speed / gameSpeed)
     }
 
     fun moveRight(){
         objectSprites?.currentDirection = AnimationDirection.RIGHT
-        xPos += (speed / gameSpeed)
+        position.xPos += (speed / gameSpeed)
     }
 }

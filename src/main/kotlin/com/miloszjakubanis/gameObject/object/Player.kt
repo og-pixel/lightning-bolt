@@ -1,17 +1,15 @@
 package com.miloszjakubanis.gameObject.`object`
 
+import com.miloszjakubanis.Position
 import com.miloszjakubanis.controls.Button.*
 import com.miloszjakubanis.controls.Button
-import com.miloszjakubanis.gameEngine.GameLoop
-import com.miloszjakubanis.gameObject.spriteGraphics.AnimationDirection
-import com.miloszjakubanis.gameObject.spriteGraphics.ObjectSprites
+import com.miloszjakubanis.gameObject.sprite.ObjectSprites
 
 class Player(
-    xPos: Double,
-    yPos: Double,
+    position: Position,
     objectSprites: ObjectSprites = ObjectSprites(),
     speed: Double = 60.0
-) : Controllable, Character(xPos, yPos, objectSprites, speed) {
+) : Controllable, Character(position, objectSprites, speed) {
 
     override fun readInput(pressedButton: Button) {
         if (pressedButton == BUTTON_UP) {

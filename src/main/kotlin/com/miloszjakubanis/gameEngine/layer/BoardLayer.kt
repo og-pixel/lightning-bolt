@@ -1,10 +1,10 @@
-package com.miloszjakubanis.gameEngine.board
+package com.miloszjakubanis.gameEngine.layer
 
-import com.miloszjakubanis.gameObject.spriteGraphics.SpriteFactory
+import com.miloszjakubanis.gameObject.sprite.SpriteFactory
 
 class BoardLayer(
-    override val boardWidth: Int,
-    override val boardHeight: Int,
+    override val layerWidth: Int,
+    override val layerHeight: Int,
     override val tileWidth: Double,
     override val tileHeight: Double
 ) : GameLayer {
@@ -20,12 +20,12 @@ class BoardLayer(
     }
 
     init {
-        if (boardHeight < 1 || boardWidth < 1) {
+        if (layerHeight < 1 || layerWidth < 1) {
             throw Exception("Board needs to be at least 1 by 1")
         }
-        for (y in 0..boardHeight) {
+        for (y in 0..layerHeight) {
             tileMatrix.add(ArrayList())
-            for (x in 0..boardWidth) {
+            for (x in 0..layerWidth) {
                 SpriteFactory.height = 50.0
                 SpriteFactory.width = 50.0
                 SpriteFactory.scale = 1.0

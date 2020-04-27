@@ -1,6 +1,5 @@
-package com.miloszjakubanis.gameObject.spriteGraphics
+package com.miloszjakubanis.gameObject.sprite
 
-import java.util.*
 import kotlin.collections.HashMap
 
 //TODO probably a stupid name but this is meant to store all animations that one object would have

@@ -1,6 +1,10 @@
 package com.miloszjakubanis.gameObject.`object`
 
-//class EnvironmentObject(
-//    override var animation: Animation, xPos: Double, yPos: Double
-//) : BasicObject(xPos, yPos, speed = 0.0) {
-//}
+import com.miloszjakubanis.Position
+import com.miloszjakubanis.gameObject.GameObject
+
+class EnvironmentObject(
+    position: Position,
+    speed: Double = 0.0
+) : GameObject(position, speed = speed) {
+}

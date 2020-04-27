@@ -1,26 +1,21 @@
 package com.miloszjakubanis.gameEngine
 
-import com.miloszjakubanis.controls.Button.*
 import com.miloszjakubanis.controls.Button
+import com.miloszjakubanis.controls.Button.NO_BUTTON
 import com.miloszjakubanis.controls.DefaultInput
 import com.miloszjakubanis.controls.Input
 import com.miloszjakubanis.display.MainWindow
-import com.miloszjakubanis.gameEngine.board.GameLayer
-import com.miloszjakubanis.gameEngine.board.BoardLayer
-import com.miloszjakubanis.gameEngine.board.GroundTile
-import com.miloszjakubanis.gameObject.GameObject
-import com.miloszjakubanis.gameObject.`object`.Player
-import com.miloszjakubanis.gameObject.spriteGraphics.AnimationDirection
-import com.miloszjakubanis.gameObject.spriteGraphics.SpriteFactory
-import com.miloszjakubanis.gameObject.spriteGraphics.AnimationStance
-//import com.miloszjakubanis.gameObject.spriteGraphics.AnimationDirection
-//import com.miloszjakubanis.gameObject.spriteGraphics.AnimationFactory
-//import com.miloszjakubanis.gameObject.spriteGraphics.AnimationStance
+import com.miloszjakubanis.gameEngine.layer.BoardLayer
+import com.miloszjakubanis.gameEngine.layer.GameLayer
+import com.miloszjakubanis.gameEngine.levels.DebugLevel
+import com.miloszjakubanis.gameEngine.levels.GameLevel
+import com.miloszjakubanis.gameEngine.renderer.Renderer
+import com.miloszjakubanis.gameEngine.renderer.StandardRenderer
 import javafx.application.Platform
 
 class GameLoop : Runnable {
 
-    companion object  {
+    companion object {
         const val ticksPerSecond = 60
         const val oneFrameDuration = 1000000000 / ticksPerSecond
 
@@ -33,68 +28,23 @@ class GameLoop : Runnable {
         var gameStatus: LoopStatus = LoopStatus.STOPPED
             private set
 
-        var allObjects: List<GameObject> = ArrayList()
+//        var allObjects: List<GameObject> = ArrayList()
+
+        //TODO this will be instead of all objects
+        var currentLevel: Int = 0
+        var levelList: MutableList<GameLevel> = ArrayList()
     }
 
-    //TODO should be init somehow differently
-    private val player: Player
-
-    val gameLayer: GameLayer
-
-    init {
-        SpriteFactory.height = 30.0
-        SpriteFactory.width = 30.0
-        SpriteFactory.scale = 4.0
-        SpriteFactory.animationSpeed = 1
-        var downIdleAnimation = SpriteFactory.addFrame("sprites/characters/soldier/sprite_4.png")
-            .addFrame("sprites/characters/soldier/sprite_5.png")
-            .addFrame("sprites/characters/soldier/sprite_6.png")
-            .getAnimation(AnimationStance.IDLE, AnimationDirection.DOWN)
-
-        SpriteFactory.height = 30.0
-        SpriteFactory.width = 30.0
-        SpriteFactory.scale = 4.0
-        SpriteFactory.animationSpeed = 1
-        var rightIdleAnimation = SpriteFactory.addFrame("sprites/characters/soldier/sprite_1.png")
-            .addFrame("sprites/characters/soldier/sprite_2.png")
-            .addFrame("sprites/characters/soldier/sprite_3.png")
-            .getAnimation(AnimationStance.IDLE, AnimationDirection.RIGHT)
-
-        SpriteFactory.height = 30.0
-        SpriteFactory.width = 30.0
-        SpriteFactory.scale = 4.0
-        SpriteFactory.animationSpeed = 1
-        var upIdleAnimation = SpriteFactory.addFrame("sprites/characters/soldier/sprite_7.png")
-            .addFrame("sprites/characters/soldier/sprite_8.png")
-            .addFrame("sprites/characters/soldier/sprite_9.png")
-            .getAnimation(AnimationStance.IDLE, AnimationDirection.UP)
-
-        SpriteFactory.height = 30.0
-        SpriteFactory.width = 30.0
-        SpriteFactory.scale = 4.0
-        SpriteFactory.animationSpeed = 1
-        var leftIdleAnimation = SpriteFactory.addFrame("sprites/characters/soldier/sprite_10.png")
-            .addFrame("sprites/characters/soldier/sprite_11.png")
-            .addFrame("sprites/characters/soldier/sprite_12.png")
-            .getAnimation(AnimationStance.IDLE, AnimationDirection.LEFT)
-
-        player = Player(70.0, 200.0, speed = 300.0)
-        player.objectSprites?.addAnimation(downIdleAnimation)
-        player.objectSprites?.addAnimation(rightIdleAnimation)
-        player.objectSprites?.addAnimation(upIdleAnimation)
-        player.objectSprites?.addAnimation(leftIdleAnimation)
-
-        allObjects = allObjects + player
-
-        gameLayer = BoardLayer(10,10, 50.0, 50.0)
-        //TODO remove
-//        System.exit(0)
-    }
+    private val renderer: Renderer = StandardRenderer()
+//    val gameLayer: GameLayer
+    val input: Input = DefaultInput()
 
     var pressedButton: Button = NO_BUTTON
-
-    val input: Input = DefaultInput()
     var mainWindow: MainWindow = MainWindow(this, input)
+
+    init {
+        levelList.add(DebugLevel())
+    }
 
     private fun tick() {
         takeUserInput()
@@ -103,42 +53,31 @@ class GameLoop : Runnable {
 
     private fun takeUserInput() {
         if (pressedButton != NO_BUTTON) {
-            player.readInput(pressedButton)
+//            player.readInput(pressedButton)
             pressedButton = NO_BUTTON
         }
     }
 
     private fun updateAnimation() {
-        //TODO put animation back
-        allObjects.forEach { e -> e.objectSprites?.getCurrentAnimation()?.nextFrame() }
+        levelList[currentLevel].visibleObjects.forEach { e ->
+            e.objectSprites?.getCurrentAnimation()?.nextFrame()
+        }
     }
 
     private fun redrawCanvas() {
         clearCanvas()
         val graphicsContext = mainWindow.controller.graphicsContext
 
+        //TODO this should render board etc
+        renderer.renderVisible()
 
-        for (x in 0..gameLayer.boardHeight){
-            for (y in 0..gameLayer.boardWidth){
-                val tileImage = gameLayer.getTile(x,y).spriteFrame.image
-                val tileImage2 = (gameLayer.getTile(x,y) as GroundTile).spriteFrame2.image
-
-                if(gameLayer.getTile(x,y).isFocused){
-                    graphicsContext.drawImage(tileImage2, x * 50.0,y * 50.0)
-                }else{
-                    graphicsContext.drawImage(tileImage, x * 50.0,y * 50.0)
-                }
-
-            }
-        }
-
-        allObjects.forEach { e ->
+        levelList[currentLevel].visibleObjects.forEach { e ->
             graphicsContext.drawImage(e.objectSprites?.getCurrentAnimation()?.currentSprite?.image, e.xPos, e.yPos)
         }
 
     }
 
-    private fun clearCanvas(){
+    private fun clearCanvas() {
         val width = mainWindow.controller.mainCanvas.width
         val height = mainWindow.controller.mainCanvas.height
         val graphicsContext = mainWindow.controller.graphicsContext

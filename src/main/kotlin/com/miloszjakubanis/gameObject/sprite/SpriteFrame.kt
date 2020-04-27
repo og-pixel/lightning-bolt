@@ -1,4 +1,4 @@
-package com.miloszjakubanis.gameObject.spriteGraphics
+package com.miloszjakubanis.gameObject.sprite
 
 import javafx.scene.image.Image
 
