@@ -1,5 +1,7 @@
 package com.miloszjakubanis.gameEngine.layer
 
+import com.miloszjakubanis.gameObject.`object`.GroundTile
+import com.miloszjakubanis.gameObject.`object`.Tile
 import com.miloszjakubanis.gameObject.sprite.SpriteFactory
 
 class BoardLayer(
@@ -11,11 +13,7 @@ class BoardLayer(
 
     var tileMatrix: MutableList<MutableList<Tile>> = ArrayList()
 
-    //TODO maybe I will use it for fake depth
-    var zAxis = 3
-
     override fun getTile(xPos: Int, yPos: Int): Tile {
-
         return tileMatrix[yPos][xPos]
     }
 
@@ -26,8 +24,8 @@ class BoardLayer(
         for (y in 0..layerHeight) {
             tileMatrix.add(ArrayList())
             for (x in 0..layerWidth) {
-                SpriteFactory.height = 50.0
-                SpriteFactory.width = 50.0
+                SpriteFactory.height = tileHeight
+                SpriteFactory.width = tileWidth
                 SpriteFactory.scale = 1.0
                 val frame = SpriteFactory.getSingleFrame("sprites/terrain/grass.png", false)
 

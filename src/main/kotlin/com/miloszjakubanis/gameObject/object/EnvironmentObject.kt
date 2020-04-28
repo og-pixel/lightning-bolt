@@ -1,6 +1,6 @@
 package com.miloszjakubanis.gameObject.`object`
 
-import com.miloszjakubanis.Position
+import com.miloszjakubanis.gameObject.Position
 import com.miloszjakubanis.gameObject.GameObject
 
 class EnvironmentObject(

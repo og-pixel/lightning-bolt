@@ -1,18 +1,26 @@
 package com.miloszjakubanis.gameEngine.renderer
 
 import com.miloszjakubanis.gameEngine.layer.GameLayer
-import com.miloszjakubanis.gameEngine.levels.GameLevel
+import javafx.scene.canvas.GraphicsContext
 
 interface Renderer {
 
-    //TODO should be deleted
-    var listOfLayers: MutableList<GameLayer>
+    val graphicsContext: GraphicsContext
 
-    var listOfGameLevels: MutableList<GameLevel>
+    val layerList: List<GameLayer>
 
-    fun renderVisible()
+    fun renderLayer(layer: GameLayer)
 
-    fun renderVisible(index: Int)
+    fun renderVisibleObjects()
 
-    fun renderVisible(layer: GameLayer)
+    //TODO make sure it renders in right order
+    fun renderLayers() {
+        for (layer in layerList) renderLayer(layer)
+    }
+
+    fun clearCanvas() {
+        val width = graphicsContext.canvas.width
+        val height = graphicsContext.canvas.height
+        graphicsContext.clearRect(0.0, 0.0, width, height)
+    }
 }

@@ -5,8 +5,7 @@ import com.miloszjakubanis.controls.Button.NO_BUTTON
 import com.miloszjakubanis.controls.DefaultInput
 import com.miloszjakubanis.controls.Input
 import com.miloszjakubanis.display.MainWindow
-import com.miloszjakubanis.gameEngine.layer.BoardLayer
-import com.miloszjakubanis.gameEngine.layer.GameLayer
+import com.miloszjakubanis.gameEngine.layer.ObjectVisibility
 import com.miloszjakubanis.gameEngine.levels.DebugLevel
 import com.miloszjakubanis.gameEngine.levels.GameLevel
 import com.miloszjakubanis.gameEngine.renderer.Renderer
@@ -15,10 +14,10 @@ import javafx.application.Platform
 
 class GameLoop : Runnable {
 
+    //Additional information used to see at what tick the game is on etc
     companion object {
         const val ticksPerSecond = 60
         const val oneFrameDuration = 1000000000 / ticksPerSecond
-
         var currentTick = 0
             private set
 
@@ -28,60 +27,70 @@ class GameLoop : Runnable {
         var gameStatus: LoopStatus = LoopStatus.STOPPED
             private set
 
-//        var allObjects: List<GameObject> = ArrayList()
+        var currentLevelIndex: Int = 0
+            private set
 
-        //TODO this will be instead of all objects
-        var currentLevel: Int = 0
         var levelList: MutableList<GameLevel> = ArrayList()
+
+        val currentLevel: GameLevel
+            get() = levelList[currentLevelIndex]
+
+        init {
+            levelList.add(DebugLevel())
+        }
     }
 
-    private val renderer: Renderer = StandardRenderer()
-//    val gameLayer: GameLayer
-    val input: Input = DefaultInput()
+    //User's Input
+    val gameInput: Input = DefaultInput()
 
+    //Main Window Game is displaying on
+    var mainWindow: MainWindow = MainWindow(this, gameInput)
+
+    //What Button user is pressing, might be removed to be done differently later
     var pressedButton: Button = NO_BUTTON
-    var mainWindow: MainWindow = MainWindow(this, input)
 
-    init {
-        levelList.add(DebugLevel())
-    }
+    //Renderer takes graphics context from window controller to draw with
+    //Layers to render (mostly from a currently played level)
+    private val renderer: Renderer = StandardRenderer(
+        mainWindow.controller.graphicsContext,
+        levelList[currentLevelIndex].listGameLayers
+    )
 
     private fun tick() {
         takeUserInput()
         updateAnimation()
     }
 
+    //TODO at some point work on it,
+    // it needs to be more sophisticated
     private fun takeUserInput() {
         if (pressedButton != NO_BUTTON) {
-//            player.readInput(pressedButton)
+            levelList[currentLevelIndex].playerObject.readInput(pressedButton)
             pressedButton = NO_BUTTON
         }
     }
 
+    //TODO for now it forces to render visible and not visible elements,
+    // later I need a way to check on each tick whenever an element should be moved between visible
+    // and not visible
     private fun updateAnimation() {
-        levelList[currentLevel].visibleObjects.forEach { e ->
-            e.objectSprites?.getCurrentAnimation()?.nextFrame()
-        }
+        currentLevel.gameTick()
+
+
+
+//        currentLevel.allObjects[ObjectVisibility.VISIBLE]?.forEach { e ->
+//            e.objectSprites?.currentAnimation?.nextFrame()
+//        }
+//
+//        currentLevel.allObjects[ObjectVisibility.NOT_VISIBLE]?.forEach { e ->
+//            e.objectSprites?.currentAnimation?.nextFrame()
+//        }
     }
 
     private fun redrawCanvas() {
-        clearCanvas()
-        val graphicsContext = mainWindow.controller.graphicsContext
-
-        //TODO this should render board etc
-        renderer.renderVisible()
-
-        levelList[currentLevel].visibleObjects.forEach { e ->
-            graphicsContext.drawImage(e.objectSprites?.getCurrentAnimation()?.currentSprite?.image, e.xPos, e.yPos)
-        }
-
-    }
-
-    private fun clearCanvas() {
-        val width = mainWindow.controller.mainCanvas.width
-        val height = mainWindow.controller.mainCanvas.height
-        val graphicsContext = mainWindow.controller.graphicsContext
-        graphicsContext.clearRect(0.0, 0.0, width, height)
+        renderer.clearCanvas()
+        renderer.renderLayers()
+        renderer.renderVisibleObjects()
     }
 
     override fun run() {

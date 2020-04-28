@@ -1,26 +1,28 @@
 package com.miloszjakubanis.gameEngine.levels
 
-import com.miloszjakubanis.Position
+import com.miloszjakubanis.gameObject.Position
+import com.miloszjakubanis.gameEngine.layer.GameLayer
+import com.miloszjakubanis.gameEngine.layer.ObjectVisibility
 import com.miloszjakubanis.gameEngine.layer.gui.GuiLayer
 import com.miloszjakubanis.gameObject.GameObject
 import com.miloszjakubanis.gameObject.`object`.Player
 import com.miloszjakubanis.gameObject.sprite.AnimationDirection
 import com.miloszjakubanis.gameObject.sprite.AnimationStance
 import com.miloszjakubanis.gameObject.sprite.SpriteFactory
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class DebugLevel(
-    override val visibleObjects: MutableList<GameObject> = ArrayList(),
-    override val notVisibleObjects: MutableList<GameObject> = ArrayList()
+    override var allObjects: HashMap<ObjectVisibility, MutableList<GameObject>> = HashMap(),
+    override val playerObject: Player = Player()
 ) : GameLevel {
 
     override var guiLayer: GuiLayer
-        get() = TODO("Not yet implemented")
-        set(value) {}
-    override var listGameLayers: MutableList<GameLevel>
-        get() = TODO("Not yet implemented")
+        get() = TODO()
         set(value) {}
 
-    private val player: Player
+    override var listGameLayers: MutableList<GameLayer> = ArrayList()
 
     init {
         SpriteFactory.height = 30.0
@@ -59,11 +61,16 @@ class DebugLevel(
             .addFrame("sprites/characters/soldier/sprite_12.png")
             .getAnimation(AnimationStance.IDLE, AnimationDirection.LEFT)
 
-        player = Player(Position(70.0, 200.0), speed = 300.0)
+        val player = Player(Position(70.0, 200.0), speed = 300.0)
         player.objectSprites?.addAnimation(downIdleAnimation)
         player.objectSprites?.addAnimation(rightIdleAnimation)
         player.objectSprites?.addAnimation(upIdleAnimation)
         player.objectSprites?.addAnimation(leftIdleAnimation)
 
+        ObjectVisibility.values().forEach { visibility ->
+            allObjects[visibility] = ArrayList()
+        }
+
+        allObjects[ObjectVisibility.VISIBLE]!!.add(player)
     }
 }

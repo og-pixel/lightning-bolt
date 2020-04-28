@@ -33,6 +33,8 @@ and learning only so I might ignore
 
 ## Version History
 * 0.0.1: Basic Init and render loop
+* 0.0.2: Basic Sprite animations and creation factory
+![](src/main/resources/img/history_gif/1.gif)
 
 ## How-to use this code
 *

@@ -28,21 +28,6 @@ class MainWindow(
             gameLoop.pressedButton = input.getKeyPressed(event.text)
         }
         controller.pane.addEventHandler(KeyEvent.KEY_PRESSED, eventHandler)
-
-        //TODO mouse event to find tiles on canvas
-//        val mouseEvent: EventHandler<MouseEvent> = EventHandler { event ->
-//            val xPos = event.sceneX
-//            val yPos = event.sceneY
-//            val tileWidth = gameLoop.gameLayer.tileWidth
-//            val tileHeight = gameLoop.gameLayer.tileHeight
-//
-//            val tileX = (xPos / tileWidth).toInt() - 1
-//            val tileY = (yPos / tileHeight).toInt() - 1
-//            println("You would get tile: $tileX, $tileY")
-//
-//            gameLoop.gameLayer.getTile(tileX, tileY).isFocused = true
-//        }
-//        controller.mainCanvas.addEventHandler(MouseEvent.MOUSE_MOVED, mouseEvent)
     }
 
     override fun run() {

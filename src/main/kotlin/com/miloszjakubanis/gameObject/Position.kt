@@ -1,4 +1,4 @@
-package com.miloszjakubanis
+package com.miloszjakubanis.gameObject
 
 class Position(
     var xPos: Double = 0.0,

@@ -1,4 +1,4 @@
-package com.miloszjakubanis.gameEngine.layer
+package com.miloszjakubanis.gameObject.`object`
 
 import com.miloszjakubanis.gameObject.sprite.SpriteFrame
 
@@ -10,4 +10,4 @@ sealed class Tile(
 
 class GroundTile(
     spriteFrame: SpriteFrame
-): Tile(spriteFrame)
+) : Tile(spriteFrame)

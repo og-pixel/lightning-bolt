@@ -1,7 +1,8 @@
 package com.miloszjakubanis.gameEngine.layer
 
-interface GameLayer: Layer {
+import com.miloszjakubanis.gameObject.`object`.Tile
 
+interface GameLayer: Layer {
     val tileWidth: Double
     val tileHeight: Double
 

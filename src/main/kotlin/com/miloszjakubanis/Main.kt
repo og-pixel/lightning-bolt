@@ -7,7 +7,6 @@ class Main : Application() {
     override fun start(primaryStage: Stage) {
         val gameLoop = GameFactory.createGameLoop(LoopType.Basic)
         Thread(gameLoop).start()
-
     }
 }
 

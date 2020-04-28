@@ -28,14 +28,17 @@ class ObjectSprites {
         return spriteMap[animationDirection]?.get(animationStance)!!
     }
 
-    fun getCurrentAnimation(): SpriteAnimation {
-        return spriteMap[currentDirection]?.get(currentStance)!!
-    }
+    val currentAnimation: SpriteAnimation
+        get() = spriteMap[currentDirection]?.get(currentStance)!!
 
     fun addAnimation(animation: SpriteAnimation) {
         spriteMap[animation.animationDirection]?.set(animation.animationStance, animation)
     }
 
+    //Set next frame
+    fun nextFrame() {
+
+    }
 
     //TODO I should stop using `e`
     private fun hasAllAnimations(): Boolean {
