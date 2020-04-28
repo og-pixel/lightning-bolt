@@ -20,8 +20,10 @@ abstract class GameObject(
 
     var objectName = ""
 
-    val xPos: Double = position.xPos
-    val yPos: Double = position.yPos
+    val xPos: Double
+        get() = position.xPos
+    val yPos: Double
+        get() = position.yPos
 
     //TODO I repeat this val a couple of times
     val gameSpeed: Int
@@ -34,7 +36,7 @@ abstract class GameObject(
         val animationStance: AnimationStance = objectSprites!!.currentStance
         val animationDirection: AnimationDirection = objectSprites!!.currentDirection
         objectSprites?.spriteMap
-       
+
     }
 
     fun moveUp() {

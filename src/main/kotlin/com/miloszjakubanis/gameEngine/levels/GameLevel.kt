@@ -9,13 +9,10 @@ import com.miloszjakubanis.gameObject.`object`.Player
 
 interface GameLevel {
 
-    var allObjects: HashMap<ObjectVisibility, MutableList<GameObject>>
-
     val playerObject: Player
-
+    var allObjects: HashMap<ObjectVisibility, MutableList<GameObject>>
     var guiLayer: GuiLayer
     var listGameLayers: MutableList<GameLayer>
-
 //    val objectSpawnerFactory: ObjectSpawnerFactory
 
     /**

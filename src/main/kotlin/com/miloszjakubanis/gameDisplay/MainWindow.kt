@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader
 import javafx.scene.Parent
 import javafx.scene.Scene
 import javafx.scene.input.KeyEvent
+import javafx.scene.input.MouseEvent
 import javafx.stage.Stage
 
 class MainWindow(
@@ -26,7 +27,12 @@ class MainWindow(
         val eventHandler: EventHandler<KeyEvent> = EventHandler { event ->
             gameLoop.pressedButton = input.getKeyPressed(event.text)
         }
-        controller.pane.addEventHandler(KeyEvent.KEY_PRESSED, eventHandler)
+        controller.mainCanvas.isFocusTraversable = true
+        controller.mainCanvas.addEventHandler(KeyEvent.KEY_PRESSED, eventHandler)
+
+//        val keyEvent: EventHandler<MouseEvent> = EventHandler { event ->
+//        }
+//        controller.mainCanvas.addEventHandler(MouseEvent.MOUSE_MOVED, keyEvent)
     }
 
     override fun run() {

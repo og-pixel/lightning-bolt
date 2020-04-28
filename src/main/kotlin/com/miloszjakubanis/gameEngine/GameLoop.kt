@@ -42,11 +42,11 @@ class GameLoop : Runnable {
     //User's Input
     val gameInput: Input = DefaultInput()
 
-    //Main Window Game is displaying on
-    var mainWindow: MainWindow = MainWindow(this, gameInput)
-
     //What Button user is pressing, might be removed to be done differently later
     var pressedButton: Button = NO_BUTTON
+
+    //Main Window Game is displaying on
+    var mainWindow: MainWindow = MainWindow(this, gameInput)
 
     //Renderer takes graphics context from window controller to draw with
     //Layers to render (mostly from a currently played level)

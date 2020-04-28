@@ -5,8 +5,6 @@ import com.miloszjakubanis.gameObject.GameObject
 import com.miloszjakubanis.gameObject.sprite.ObjectSprites
 
 open class Character(
-//    xPos: Double,
-//    yPos: Double,
     position: Position,
     objectSprites: ObjectSprites,
     speed: Double = 60.0

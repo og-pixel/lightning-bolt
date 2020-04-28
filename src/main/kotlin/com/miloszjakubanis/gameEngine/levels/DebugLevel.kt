@@ -16,10 +16,13 @@ import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 class DebugLevel(
-    override var allObjects: HashMap<ObjectVisibility, MutableList<GameObject>> = HashMap(),
-    override val playerObject: Player = Player()
-//    override val objectSpawnerFactory: ObjectSpawnerFactory = StandardGameObjectSpawnerFactory()
+    override var allObjects: HashMap<ObjectVisibility, MutableList<GameObject>> = HashMap()
 ) : GameLevel {
+
+    override val playerObject: Player
+        get() = player
+
+    val player: Player
 
     override var guiLayer: GuiLayer
         get() = TODO()
@@ -64,15 +67,17 @@ class DebugLevel(
             .addFrame("sprites/characters/soldier/sprite_12.png")
             .getAnimation(AnimationStance.IDLE, AnimationDirection.LEFT)
 
-        val player = Player(Position(70.0, 200.0), speed = 300.0)
+        player = Player(Position(70.0, 200.0), speed = 300.0)
         player.objectSprites?.addAnimation(downIdleAnimation)
         player.objectSprites?.addAnimation(rightIdleAnimation)
         player.objectSprites?.addAnimation(upIdleAnimation)
         player.objectSprites?.addAnimation(leftIdleAnimation)
 
-        ObjectVisibility.values().forEach { visibility ->
+        for (visibility in ObjectVisibility.values()) {
             allObjects[visibility] = ArrayList()
         }
+
+        StandardGameObjectSpawnerFactory().
 
         allObjects[ObjectVisibility.VISIBLE]!!.add(player)
     }

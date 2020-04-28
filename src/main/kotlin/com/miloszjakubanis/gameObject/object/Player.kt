@@ -6,7 +6,7 @@ import com.miloszjakubanis.controls.Button
 import com.miloszjakubanis.gameObject.sprite.ObjectSprites
 
 class Player(
-    position: Position = Position(),
+    position: Position,
     objectSprites: ObjectSprites = ObjectSprites(),
     speed: Double = 60.0
 ) : Controllable, Character(position, objectSprites, speed) {
