@@ -1,6 +1,7 @@
 package com.miloszjakubanis.gameEngine.renderer
 
 import com.miloszjakubanis.gameEngine.layer.GameLayer
+import com.miloszjakubanis.gameEngine.levels.GameLevel
 import javafx.scene.canvas.GraphicsContext
 
 interface Renderer {
@@ -8,6 +9,8 @@ interface Renderer {
     val graphicsContext: GraphicsContext
 
     val layerList: List<GameLayer>
+
+    val currentLevel: GameLevel
 
     fun renderLayer(layer: GameLayer)
 

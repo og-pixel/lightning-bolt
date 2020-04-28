@@ -1,4 +1,4 @@
-package com.miloszjakubanis.display
+package com.miloszjakubanis.gameDisplay
 
 import javafx.fxml.FXML
 import javafx.fxml.Initializable

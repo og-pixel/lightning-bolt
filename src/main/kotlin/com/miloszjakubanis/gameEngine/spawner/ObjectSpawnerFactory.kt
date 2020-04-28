@@ -1,20 +1,16 @@
 package com.miloszjakubanis.gameEngine.spawner
 
 import com.miloszjakubanis.gameEngine.GameLoop
+import com.miloszjakubanis.gameEngine.levels.GameLevel
+import com.miloszjakubanis.gameObject.GameObject
+import com.miloszjakubanis.gameObject.`object`.Player
 
-class ObjectSpawnerFactory {
+interface ObjectSpawnerFactory {
 
+    val currentLevel: GameLevel
 
-//    fun createEnvironmentObject(choice: String): EnvironmentObject {
-//
-//        return EnvironmentObject()
-//    }
+    fun createPlayerObject(): Player
 
-    /**
-     * Creates an object controllable by the player
-     */
-    fun createPlayerObject() {
-
-    }
+    fun createGameObject(): GameObject
 
 }

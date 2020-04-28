@@ -4,8 +4,7 @@ import com.miloszjakubanis.controls.Button
 import com.miloszjakubanis.controls.Button.NO_BUTTON
 import com.miloszjakubanis.controls.DefaultInput
 import com.miloszjakubanis.controls.Input
-import com.miloszjakubanis.display.MainWindow
-import com.miloszjakubanis.gameEngine.layer.ObjectVisibility
+import com.miloszjakubanis.gameDisplay.MainWindow
 import com.miloszjakubanis.gameEngine.levels.DebugLevel
 import com.miloszjakubanis.gameEngine.levels.GameLevel
 import com.miloszjakubanis.gameEngine.renderer.Renderer
@@ -51,9 +50,11 @@ class GameLoop : Runnable {
 
     //Renderer takes graphics context from window controller to draw with
     //Layers to render (mostly from a currently played level)
+    //TODO change signature
     private val renderer: Renderer = StandardRenderer(
         mainWindow.controller.graphicsContext,
-        levelList[currentLevelIndex].listGameLayers
+        levelList[currentLevelIndex].listGameLayers,
+        currentLevel
     )
 
     private fun tick() {
@@ -70,25 +71,21 @@ class GameLoop : Runnable {
         }
     }
 
-    //TODO for now it forces to render visible and not visible elements,
-    // later I need a way to check on each tick whenever an element should be moved between visible
-    // and not visible
+    /**
+     * Get all objects from the current level and perform their next
+     * animation (logic?) tick
+     */
     private fun updateAnimation() {
         currentLevel.gameTick()
-
-
-
-//        currentLevel.allObjects[ObjectVisibility.VISIBLE]?.forEach { e ->
-//            e.objectSprites?.currentAnimation?.nextFrame()
-//        }
-//
-//        currentLevel.allObjects[ObjectVisibility.NOT_VISIBLE]?.forEach { e ->
-//            e.objectSprites?.currentAnimation?.nextFrame()
-//        }
     }
 
+    /**
+     * Uses defined renderer to clear canvas and redraw
+     * game window
+     */
     private fun redrawCanvas() {
         renderer.clearCanvas()
+        //TODO render Layers is not used at the moment, I only render visible
         renderer.renderLayers()
         renderer.renderVisibleObjects()
     }

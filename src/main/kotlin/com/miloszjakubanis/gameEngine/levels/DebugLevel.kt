@@ -4,6 +4,8 @@ import com.miloszjakubanis.gameObject.Position
 import com.miloszjakubanis.gameEngine.layer.GameLayer
 import com.miloszjakubanis.gameEngine.layer.ObjectVisibility
 import com.miloszjakubanis.gameEngine.layer.gui.GuiLayer
+import com.miloszjakubanis.gameEngine.spawner.ObjectSpawnerFactory
+import com.miloszjakubanis.gameEngine.spawner.StandardGameObjectSpawnerFactory
 import com.miloszjakubanis.gameObject.GameObject
 import com.miloszjakubanis.gameObject.`object`.Player
 import com.miloszjakubanis.gameObject.sprite.AnimationDirection
@@ -16,6 +18,7 @@ import kotlin.collections.HashMap
 class DebugLevel(
     override var allObjects: HashMap<ObjectVisibility, MutableList<GameObject>> = HashMap(),
     override val playerObject: Player = Player()
+//    override val objectSpawnerFactory: ObjectSpawnerFactory = StandardGameObjectSpawnerFactory()
 ) : GameLevel {
 
     override var guiLayer: GuiLayer
