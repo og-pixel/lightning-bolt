@@ -6,8 +6,8 @@ import com.miloszjakubanis.gameObject.`object`.Tile
 import com.miloszjakubanis.gameObject.sprite.SpriteFactory
 
 class BoardLayer(
-    override val layerWidth: Int,
-    override val layerHeight: Int,
+    override val numberOfColumns: Int,
+    override val numberOfRows: Int,
     override val tileWidth: Double,
     override val tileHeight: Double
 ) : GameLayer, LoadStatus {
@@ -15,7 +15,7 @@ class BoardLayer(
     override var currentIteration: Int = 0
 
     override val noOfIterations: Int
-        get() = layerHeight * layerWidth
+        get() = numberOfRows * numberOfColumns
 
     var tileMatrix: MutableList<MutableList<Tile>> = ArrayList()
 
@@ -24,13 +24,13 @@ class BoardLayer(
     }
 
     init {
-        if (layerHeight < 1 || layerWidth < 1) {
+        if (numberOfRows < 1 || numberOfColumns < 1) {
             throw Exception("Board needs to be at least 1 by 1")
         }
 
-        for (y in 0 until layerHeight) {
+        for (y in 0 until numberOfRows) {
             tileMatrix.add(ArrayList())
-            for (x in 0 until layerWidth) {
+            for (x in 0 until numberOfColumns) {
                 SpriteFactory.height = tileHeight
                 SpriteFactory.width = tileWidth
                 //TODO scale for now does not work properly if tile size is wrong

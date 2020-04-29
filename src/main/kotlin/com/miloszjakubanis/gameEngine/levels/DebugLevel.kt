@@ -34,7 +34,7 @@ class DebugLevel(
 
         SpriteFactory.height = 16.0
         SpriteFactory.width = 16.0
-        SpriteFactory.scale = 3.0
+        SpriteFactory.scale = 2.0
         SpriteFactory.animationSpeed = 1
         var downIdleAnimation = SpriteFactory.addFrame("sprites/characters/soldier/sprite_4.png")
             .addFrame("sprites/characters/soldier/sprite_5.png")
@@ -43,7 +43,7 @@ class DebugLevel(
 
         SpriteFactory.height = 16.0
         SpriteFactory.width = 16.0
-        SpriteFactory.scale = 3.0
+        SpriteFactory.scale = 2.0
         SpriteFactory.animationSpeed = 1
         var rightIdleAnimation = SpriteFactory.addFrame("sprites/characters/soldier/sprite_1.png")
             .addFrame("sprites/characters/soldier/sprite_2.png")
@@ -52,7 +52,7 @@ class DebugLevel(
 
         SpriteFactory.height = 16.0
         SpriteFactory.width = 16.0
-        SpriteFactory.scale = 3.0
+        SpriteFactory.scale = 2.0
         SpriteFactory.animationSpeed = 1
         var upIdleAnimation = SpriteFactory.addFrame("sprites/characters/soldier/sprite_7.png")
             .addFrame("sprites/characters/soldier/sprite_8.png")
@@ -61,14 +61,14 @@ class DebugLevel(
 
         SpriteFactory.height = 16.0
         SpriteFactory.width = 16.0
-        SpriteFactory.scale = 3.0
+        SpriteFactory.scale = 2.0
         SpriteFactory.animationSpeed = 1
         var leftIdleAnimation = SpriteFactory.addFrame("sprites/characters/soldier/sprite_10.png")
             .addFrame("sprites/characters/soldier/sprite_11.png")
             .addFrame("sprites/characters/soldier/sprite_12.png")
             .getAnimation(AnimationStance.IDLE, AnimationDirection.LEFT)
 
-        playerObject = Player(Position(20.0, 20.0), speed = 100.0)
+        playerObject = Player(Position(0.0, 0.0), speed = 100.0)
         playerObject.objectSprites?.addAnimation(downIdleAnimation)
         playerObject.objectSprites?.addAnimation(rightIdleAnimation)
         playerObject.objectSprites?.addAnimation(upIdleAnimation)
@@ -80,7 +80,7 @@ class DebugLevel(
 //        playerObject.commandList.addCommand(MoveCommand(playerObject, Position(500.0, 500.0)))
         allObjects[ObjectVisibility.VISIBLE]!!.add(playerObject)
 
-        val boardLayer = BoardLayer(10, 10, 100.0, 100.0)
+        val boardLayer = BoardLayer(10, 5, 64.0, 64.0)
         gameLayers.add(boardLayer)
     }
 }

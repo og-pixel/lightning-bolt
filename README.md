@@ -44,6 +44,12 @@ and learning only so I might ignore
 * 0.0.4: A basic board and layers are now rendering, however it is very crude 
 
 ![Tiles responding](src/main/resources/img/history_gif/4.gif)
+
+* 0.0.5: Character can walk up to a selected square, checks manhatann distance on every tick
+so it is not efficient at all.
+
+![Tiles responding](src/main/resources/img/history_gif/5.gif)
+
 ## How-to use this code
 *
 

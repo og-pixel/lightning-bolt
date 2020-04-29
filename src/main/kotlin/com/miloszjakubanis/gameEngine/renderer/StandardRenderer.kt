@@ -14,8 +14,8 @@ class StandardRenderer(
         val tileWidth: Double = layer.tileWidth
         val tileHeight: Double = layer.tileHeight
 
-        for (y in 0 until layer.layerHeight) {
-            for (x in 0 until layer.layerWidth) {
+        for (y in 0 until layer.numberOfRows) {
+            for (x in 0 until layer.numberOfColumns) {
                 graphicsContext.drawImage(layer.getTile(x, y).getFrame().image, x * tileWidth, y * tileHeight)
             }
         }
@@ -26,7 +26,11 @@ class StandardRenderer(
      */
     override fun renderVisibleObjects() {
         currentLevel.allObjects[ObjectVisibility.VISIBLE]!!.forEach { e ->
-            graphicsContext.drawImage(e.objectSprites!!.currentAnimation.currentSprite.image, e.xPos, e.yPos)
+            val xPos =  e.xPos - (e.objectSprites!!.getWidth / 2)
+            val yPos = e.yPos - (e.objectSprites!!.getHeight / 2)
+
+
+            graphicsContext.drawImage(e.objectSprites!!.currentAnimation.currentSprite.image, xPos, yPos)
         }
     }
 }

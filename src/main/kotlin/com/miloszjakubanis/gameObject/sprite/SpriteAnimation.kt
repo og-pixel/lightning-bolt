@@ -2,6 +2,7 @@ package com.miloszjakubanis.gameObject.sprite
 
 import com.miloszjakubanis.gameEngine.GameLoop
 
+//TODO it should make sure that all frames are added and are correct size
 class SpriteAnimation(
     private val spriteFrameList: List<SpriteFrame> = ArrayList(),
     private var animationLoop: Boolean = true,

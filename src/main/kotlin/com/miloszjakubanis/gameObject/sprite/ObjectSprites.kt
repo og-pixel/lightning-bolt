@@ -49,4 +49,12 @@ class ObjectSprites {
         }
         return true
     }
+
+    //TODO refractor to better represent
+    val getWidth: Double
+        get() = currentAnimation.currentSprite.width
+
+    val getHeight: Double
+        get() = currentAnimation.currentSprite.height
+
 }
