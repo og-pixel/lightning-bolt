@@ -13,10 +13,10 @@ class ObjectSprites {
     var currentStance = AnimationStance.IDLE
 
     init {
-        for (x in AnimationDirection.values()) {
-            spriteMap[x] = HashMap()
-            for (y in AnimationStance.values()) {
-                spriteMap[x]?.set(y, null)
+        for (direction in AnimationDirection.values()) {
+            spriteMap[direction] = HashMap()
+            for (stance in AnimationStance.values()) {
+                spriteMap[direction]!![stance] = null
             }
         }
     }
@@ -32,7 +32,7 @@ class ObjectSprites {
         get() = spriteMap[currentDirection]?.get(currentStance)!!
 
     fun addAnimation(animation: SpriteAnimation) {
-        spriteMap[animation.animationDirection]?.set(animation.animationStance, animation)
+        spriteMap[animation.animationDirection]!![animation.animationStance] = animation
     }
 
     //Set next frame

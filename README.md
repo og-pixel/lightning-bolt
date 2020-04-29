@@ -33,11 +33,10 @@ and learning only so I might ignore
 
 ## Version History
 * 0.0.1: Basic Init and render loop
+![Basic Animation](src/main/resources/img/history_gif/1.gif)
 * 0.0.2: Basic Sprite animations and creation factory
-![](src/main/resources/img/history_gif/1.gif)
-* 0.0.3: Each game object holds an entire map of sprites with
-  enumms as keys directing a what current animation should be played
-![](src/main/resources/img/history_gif/2.gif)
+![Animation Swapping on Move](src/main/resources/img/history_gif/2.gif)
+* 0.0.3: Each game object holds an entire map of sprites with enumms as keys directing a what current animation should be played
 ## How-to use this code
 *
 

@@ -53,7 +53,6 @@ class GameLoop : Runnable {
     //TODO change signature
     private val renderer: Renderer = StandardRenderer(
         mainWindow.controller.graphicsContext,
-        levelList[currentLevelIndex].listGameLayers,
         currentLevel
     )
 

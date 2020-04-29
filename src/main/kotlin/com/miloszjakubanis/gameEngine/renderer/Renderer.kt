@@ -7,7 +7,6 @@ import javafx.scene.canvas.GraphicsContext
 interface Renderer {
 
     val graphicsContext: GraphicsContext
-    val layerList: List<GameLayer>
     val currentLevel: GameLevel
 
     fun renderLayer(layer: GameLayer)
@@ -15,7 +14,7 @@ interface Renderer {
 
     //TODO make sure it renders in right order
     fun renderLayers() {
-        for (layer in layerList) renderLayer(layer)
+        for (layer in currentLevel.gameLayers) renderLayer(layer)
     }
 
     fun clearCanvas() {
