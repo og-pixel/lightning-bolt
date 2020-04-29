@@ -33,10 +33,17 @@ and learning only so I might ignore
 
 ## Version History
 * 0.0.1: Basic Init and render loop
+
 ![Basic Animation](src/main/resources/img/history_gif/1.gif)
 * 0.0.2: Basic Sprite animations and creation factory
+
 ![Animation Swapping on Move](src/main/resources/img/history_gif/2.gif)
 * 0.0.3: Each game object holds an entire map of sprites with enumms as keys directing a what current animation should be played
+
+![Animation and Board Rendering](src/main/resources/img/history_gif/3.gif)
+* 0.0.4: A basic board and layers are now rendering, however it is very crude 
+
+![Tiles responding](src/main/resources/img/history_gif/4.gif)
 ## How-to use this code
 *
 
