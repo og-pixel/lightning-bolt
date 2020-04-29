@@ -1,4 +1,4 @@
-package com.miloszjakubanis
+package com.miloszjakubanis.gameEngine
 
 /**
  * Implementing this interface gives access to extract information
@@ -14,7 +14,6 @@ interface LoadStatus {
 
     val progress: Int
         get() = (currentIteration / noOfIterations) * 100
-
 
     fun clearLoading() {
         currentIteration = 0

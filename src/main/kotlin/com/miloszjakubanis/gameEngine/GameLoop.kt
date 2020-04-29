@@ -76,6 +76,8 @@ class GameLoop : Runnable {
      */
     private fun updateAnimation() {
         currentLevel.gameTick()
+        //TODO after changing animation frame, perform a decision
+        currentLevel.playerObject.commandList.getNextCommand()?.executeCommand()
     }
 
     /**
@@ -84,7 +86,6 @@ class GameLoop : Runnable {
      */
     private fun redrawCanvas() {
         renderer.clearCanvas()
-        //TODO render Layers is not used at the moment, I only render visible
         renderer.renderLayers()
         renderer.renderVisibleObjects()
     }

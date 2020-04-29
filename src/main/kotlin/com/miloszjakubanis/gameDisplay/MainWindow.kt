@@ -21,8 +21,10 @@ class MainWindow(
 
     init {
         addInputListeners()
+        controller.addEventListener()
     }
 
+    //TODO move to controller entirely
     private fun addInputListeners() {
         val eventHandler: EventHandler<KeyEvent> = EventHandler { event ->
             gameLoop.pressedButton = input.getKeyPressed(event.text)
@@ -30,9 +32,6 @@ class MainWindow(
         controller.mainCanvas.isFocusTraversable = true
         controller.mainCanvas.addEventHandler(KeyEvent.KEY_PRESSED, eventHandler)
 
-//        val keyEvent: EventHandler<MouseEvent> = EventHandler { event ->
-//        }
-//        controller.mainCanvas.addEventHandler(MouseEvent.MOUSE_MOVED, keyEvent)
     }
 
     override fun run() {

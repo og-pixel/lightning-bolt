@@ -3,6 +3,8 @@ package com.miloszjakubanis.gameObject
 import com.miloszjakubanis.gameEngine.GameLoop
 import com.miloszjakubanis.gameObject.artificialIntelligence.Ai
 import com.miloszjakubanis.gameObject.hitbox.HitBox
+import com.miloszjakubanis.gameObject.orders.Command
+import com.miloszjakubanis.gameObject.orders.CommandList
 import com.miloszjakubanis.gameObject.sound.SoundSource
 import com.miloszjakubanis.gameObject.sprite.AnimationDirection
 import com.miloszjakubanis.gameObject.sprite.AnimationStance
@@ -18,7 +20,8 @@ abstract class GameObject(
     var soundSource: SoundSource? = null
     var ai: Ai? = null
 
-    var objectName = ""
+    //TODO change
+    var commandList: CommandList = CommandList()
 
     val xPos: Double
         get() = position.xPos
@@ -30,9 +33,11 @@ abstract class GameObject(
         get() = GameLoop.ticksPerSecond
 
     fun updateObject() {
+//        commandList.getNextCommand()?.executeCommand()
     }
 
     fun nextFrame() {
+        throw Exception("this does not work")
         val animationStance: AnimationStance = objectSprites!!.currentStance
         val animationDirection: AnimationDirection = objectSprites!!.currentDirection
         objectSprites?.spriteMap

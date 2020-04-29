@@ -1,11 +1,16 @@
 package com.miloszjakubanis.gameObject.sprite
 
+import javafx.scene.Group
+import javafx.scene.effect.BlendMode
 import javafx.scene.image.Image
+import javafx.scene.image.ImageView
+import javax.swing.GroupLayout
 
 /**
  * Creates singular "frames" and
  * whole animations
  */
+//TODO  change to regualr class?
 object SpriteFactory {
 
     var width = 0.0

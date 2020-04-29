@@ -11,7 +11,14 @@ class StandardRenderer(
 ) : Renderer {
 
     override fun renderLayer(layer: GameLayer) {
-        TODO()
+        val tileWidth: Double = layer.tileWidth
+        val tileHeight: Double = layer.tileHeight
+
+        for (y in 0 until layer.layerHeight) {
+            for (x in 0 until layer.layerWidth) {
+                graphicsContext.drawImage(layer.getTile(x, y).getFrame().image, x * tileWidth, y * tileHeight)
+            }
+        }
     }
 
     /**

@@ -9,6 +9,7 @@ import com.miloszjakubanis.gameEngine.objectFactory.DebugObjectFactory
 import com.miloszjakubanis.gameEngine.objectFactory.ObjectFactory
 import com.miloszjakubanis.gameObject.GameObject
 import com.miloszjakubanis.gameObject.`object`.Player
+import com.miloszjakubanis.gameObject.orders.MoveCommand
 import com.miloszjakubanis.gameObject.sprite.AnimationDirection
 import com.miloszjakubanis.gameObject.sprite.AnimationStance
 import com.miloszjakubanis.gameObject.sprite.SpriteFactory
@@ -31,43 +32,43 @@ class DebugLevel(
     init {
         objectFactory = DebugObjectFactory(this)
 
-        SpriteFactory.height = 30.0
-        SpriteFactory.width = 30.0
-        SpriteFactory.scale = 4.0
+        SpriteFactory.height = 16.0
+        SpriteFactory.width = 16.0
+        SpriteFactory.scale = 3.0
         SpriteFactory.animationSpeed = 1
         var downIdleAnimation = SpriteFactory.addFrame("sprites/characters/soldier/sprite_4.png")
             .addFrame("sprites/characters/soldier/sprite_5.png")
             .addFrame("sprites/characters/soldier/sprite_6.png")
             .getAnimation(AnimationStance.IDLE, AnimationDirection.DOWN)
 
-        SpriteFactory.height = 30.0
-        SpriteFactory.width = 30.0
-        SpriteFactory.scale = 4.0
+        SpriteFactory.height = 16.0
+        SpriteFactory.width = 16.0
+        SpriteFactory.scale = 3.0
         SpriteFactory.animationSpeed = 1
         var rightIdleAnimation = SpriteFactory.addFrame("sprites/characters/soldier/sprite_1.png")
             .addFrame("sprites/characters/soldier/sprite_2.png")
             .addFrame("sprites/characters/soldier/sprite_3.png")
-            .getAnimation(AnimationStance.IDLE, AnimationDirection.RIGHT)
+            .getAnimation(AnimationStance.IDLE, AnimationDirection.RIGHT )
 
-        SpriteFactory.height = 30.0
-        SpriteFactory.width = 30.0
-        SpriteFactory.scale = 4.0
+        SpriteFactory.height = 16.0
+        SpriteFactory.width = 16.0
+        SpriteFactory.scale = 3.0
         SpriteFactory.animationSpeed = 1
         var upIdleAnimation = SpriteFactory.addFrame("sprites/characters/soldier/sprite_7.png")
             .addFrame("sprites/characters/soldier/sprite_8.png")
             .addFrame("sprites/characters/soldier/sprite_9.png")
             .getAnimation(AnimationStance.IDLE, AnimationDirection.UP)
 
-        SpriteFactory.height = 30.0
-        SpriteFactory.width = 30.0
-        SpriteFactory.scale = 4.0
+        SpriteFactory.height = 16.0
+        SpriteFactory.width = 16.0
+        SpriteFactory.scale = 3.0
         SpriteFactory.animationSpeed = 1
         var leftIdleAnimation = SpriteFactory.addFrame("sprites/characters/soldier/sprite_10.png")
             .addFrame("sprites/characters/soldier/sprite_11.png")
             .addFrame("sprites/characters/soldier/sprite_12.png")
             .getAnimation(AnimationStance.IDLE, AnimationDirection.LEFT)
 
-        playerObject = Player(Position(70.0, 200.0), speed = 300.0)
+        playerObject = Player(Position(20.0, 20.0), speed = 100.0)
         playerObject.objectSprites?.addAnimation(downIdleAnimation)
         playerObject.objectSprites?.addAnimation(rightIdleAnimation)
         playerObject.objectSprites?.addAnimation(upIdleAnimation)
@@ -76,9 +77,10 @@ class DebugLevel(
         for (visibility in ObjectVisibility.values()) {
             allObjects[visibility] = ArrayList()
         }
+//        playerObject.commandList.addCommand(MoveCommand(playerObject, Position(500.0, 500.0)))
         allObjects[ObjectVisibility.VISIBLE]!!.add(playerObject)
 
-        val boardLayer = BoardLayer(800, 600, 50.0, 50.0)
+        val boardLayer = BoardLayer(10, 10, 100.0, 100.0)
         gameLayers.add(boardLayer)
     }
 }

@@ -29,7 +29,7 @@ class ObjectSprites {
     }
 
     val currentAnimation: SpriteAnimation
-        get() = spriteMap[currentDirection]?.get(currentStance)!!
+        get() = spriteMap[currentDirection]!![currentStance]!!
 
     fun addAnimation(animation: SpriteAnimation) {
         spriteMap[animation.animationDirection]!![animation.animationStance] = animation
